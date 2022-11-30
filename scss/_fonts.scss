@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+//fonts
+
+$mainFont: 'Roboto', sans-serif;
+
+//text sizing
+
+$textSm: 1.5rem;
+$textMd: 2rem;
+$textLg: 3rem;
+$textXl: 4rem;
+
+//font weight
+
+$bold: 500;
+$regular: 300;
+$light: 200;
+
+//clases
+
+.textBold{
+    font-weight: $bold;
+}
+
+.textLight{
+    font-weight: $light;
+}
+
+.textRegular{
+    font-weight: $regular;
+}
+
+.textCenter{
+    text-align: center;
+}
+
+.textLeft{
+    text-align: left;
+}
+
+.textRight{
+    text-align: right;
+}

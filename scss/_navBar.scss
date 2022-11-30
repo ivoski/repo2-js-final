@@ -1,0 +1,20 @@
+nav{
+    position: sticky;
+    top: 0;
+    padding: 4px 30px;
+    ul{
+        list-style: none;
+        li{
+            list-style: none;
+            margin: 0 6px;
+            font-family: $mainFont;
+            font-size: $textMd;
+            a{
+                text-decoration: none;
+                font-family: $mainFont;
+                font-size: $textMd;
+                font-weight: $light;
+            }
+        }
+    }
+}

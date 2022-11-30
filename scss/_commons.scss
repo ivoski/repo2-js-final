@@ -1,0 +1,17 @@
+h1,
+h2,
+h3,
+h4{
+    font-family: $mainFont;
+    font-size: $textXl;
+    font-weight: $bold;
+}
+
+p{
+    font-family: $mainFont;
+    font-size: $textMd;
+}
+
+html{
+    font-size: 62.5%;
+}
