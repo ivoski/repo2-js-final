@@ -45,24 +45,23 @@
 // EVENTOS Y DOM
 let carrito = JSON.parse(localStorage.getItem("carrito")) || []
 
-const contenedorProductos = document.querySelector(`#contenedor-productos`)
 const contenedorCarrito = document.querySelector(`#carrito-contenedor`)
 const contadorCarrito = document.querySelector(`#contadorCarrito`)
 const contadorPrecioTotal = document.querySelector(`#precioTotal`)
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('carrito')) {
-        renderCarrito()
-    }
-})
+ document.addEventListener('DOMContentLoaded', () => {
+     if (localStorage.getItem('carrito')) {
+         renderCarrito()
+     }
+ })
 
-const SP =  [
-    { id: 5, nombre: "Navaja para afeitar", tipo: "Afeitado", desc: "Navaja para un afeitado masculino", precio: 2499, img: '../img/nvj.jpg' },
-    { id: 6, nombre: "Espuma para afeitar", tipo: "Afeitado", desc: "Espuma para un afeitado suave", precio: 890, img: '../img/esp.jpg' },
-    { id: 7, nombre: "Kit de afeitado", tipo: "Afeitado", desc: "El kit definitivo para afeitarse", precio: 3499, img: '../img/kit.jpg' },
-    { id: 8, nombre: "Tinturas permanentes", tipo: "Tintura", desc: "Todos los colores disponibles", precio: 1780, img: '../img/ktt.jpg' }
-]
+// const SP =  [
+//     { id: 5, nombre: "Navaja para afeitar", tipo: "Afeitado", desc: "Navaja para un afeitado masculino", precio: 2499, img: '../img/nvj.jpg' },
+//     { id: 6, nombre: "Espuma para afeitar", tipo: "Afeitado", desc: "Espuma para un afeitado suave", precio: 890, img: '../img/esp.jpg' },
+//     { id: 7, nombre: "Kit de afeitado", tipo: "Afeitado", desc: "El kit definitivo para afeitarse", precio: 3499, img: '../img/kit.jpg' },
+//     { id: 8, nombre: "Tinturas permanentes", tipo: "Tintura", desc: "Todos los colores disponibles", precio: 1780, img: '../img/ktt.jpg' }
+// ]
 
 const pedirProductos =  () => {
     return new Promise ( (resolve, reject)  => {
@@ -75,68 +74,68 @@ const pedirProductos =  () => {
 
 let productos = []
 
-const renderProductos = (Arr) => {
-        SP.forEach((producto) => {
+// const renderProductos = (Arr) => {
+//         SP.forEach((producto) => {
 
-        const div = document.createElement('div')
-        div.className = 'producto'
+//         const div = document.createElement('div')
+//         div.className = 'producto'
     
-        div.innerHTML = `
-                <img src=${producto.img} alt="">
-                <h3>${producto.nombre}</h3>
-                <p>${producto.desc}</p>
-                <p class="precioProducto">Precio: $${producto.precio}</p>
-        `
+//         div.innerHTML = `
+//                 <img src=${producto.img} alt="">
+//                 <h3>${producto.nombre}</h3>
+//                 <p>${producto.desc}</p>
+//                 <p class="precioProducto">Precio: $${producto.precio}</p>
+//         `
     
-        const button = document.createElement('button')
-        button.className = "boton-agregar"
-        button.innerHTML = `Agregar <i class="fas fa-shopping-cart"></i>`
+//         const button = document.createElement('button')
+//         button.className = "boton-agregar"
+//         button.innerHTML = `Agregar <i class="fas fa-shopping-cart"></i>`
     
-        button.addEventListener('click', () => {
-            agregarAlCarrito(producto.id)
-        })
+//         button.addEventListener('click', () => {
+//             agregarAlCarrito(producto.id)
+//         })
     
-        div.append(button)
+//         div.append(button)
     
-        contenedorProductos.append(div)
-    })
-}
+//         contenedorProductos.append(div)
+//     })
+// }
 
-pedirProductos ()
-    .then ((res)    =>{
-        productos = res 
-        renderProductos (productos)
-    })
+// pedirProductos ()
+//     .then ((res)    =>{
+//         productos = res 
+//         renderProductos (productos)
+//     })
 
-    stockProductos.forEach((producto) => {
+    // stockProductos.forEach((producto) => {
 
-        const div = document.createElement('div')
-        div.className = 'producto'
+    //     const div = document.createElement('div')
+    //     div.className = 'producto'
     
-        div.innerHTML = `
-                <img src=${producto.img} alt="">
-                <h3>${producto.nombre}</h3>
-                <p>${producto.desc}</p>
-                <p class="precioProducto">Precio: $${producto.precio}</p>
-        `
+    //     div.innerHTML = `
+    //             <img src=${producto.img} alt="">
+    //             <h3>${producto.nombre}</h3>
+    //             <p>${producto.desc}</p>
+    //             <p class="precioProducto">Precio: $${producto.precio}</p>
+    //     `
     
-        const button = document.createElement('button')
-        button.className = "boton-agregar"
-        button.innerHTML = `Agregar <i class="fas fa-shopping-cart"></i>`
+    //     const button = document.createElement('button')
+    //     button.className = "boton-agregar"
+    //     button.innerHTML = `Agregar <i class="fas fa-shopping-cart"></i>`
     
-        button.addEventListener('click', () => {
-            agregarAlCarrito(producto.id)
-        })
+    //     button.addEventListener('click', () => {
+    //         agregarAlCarrito(producto.id)
+    //     })
     
-        div.append(button)
+    //     div.append(button)
     
-        contenedorProductos.append(div)
-    })    
+    //     contenedorProductos.append(div)
+    // })    
 
 
 // Agregar productos al carrito 
-const agregarAlCarrito = (id) => {
-    const producto = stockProductos.find( (item) => item.id === id )
+const agregarAlCarrito = (id, data) => {
+    const producto = data.find( (item) => item.id === id )
     carrito.push(producto)
     
     Swal.fire({
@@ -166,7 +165,9 @@ const renderListadoCarrito = () => {
     contenedorCarrito.innerHTML = ''
 
     carrito.forEach((producto) => {
+        
         const div = document.createElement('div')
+        console.log(producto)
         div.className = "productoEnCarrito"
         div.innerHTML = `
             <p>${producto.nombre}</p>
@@ -231,3 +232,39 @@ btnVaciar.addEventListener('click', () => {
     }
     )
 })
+
+
+// Fetch
+
+const contenedorProductos = document.querySelector(`#contenedor-productos`)
+fetch('../js/stock.json')
+  .then(response => response.json())
+  .then((data) => {
+    console.log(data)
+    data.forEach((producto) => {
+
+        const div = document.createElement('div')
+        div.className = 'producto'
+    
+        div.innerHTML = `
+                <img src=${producto.img} alt="">
+                <h3>${producto.nombre}</h3>
+                <p>${producto.desc}</p>
+                <p class="precioProducto">Precio: $${producto.precio}</p>
+                `
+                const button = document.createElement('button')
+                button.className = "boton-agregar"
+                button.innerHTML = `Agregar <i class="fas fa-shopping-cart"></i>`
+              
+                button.addEventListener('click', () => {
+                    agregarAlCarrito(producto.id, data)
+                })
+              
+                div.append(button)
+    
+    
+        contenedorProductos.append(div)
+    })    
+  });
+
+// Realice las promesas antes de la clase de Fetch, por lo que tengo entendido el Fetch contiene una promesa por eso la deje comentada.
