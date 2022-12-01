@@ -57,31 +57,55 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 })
 
+const SP =  [
+    { id: 5, nombre: "Navaja para afeitar", tipo: "Afeitado", desc: "Navaja para un afeitado masculino", precio: 2499, img: '../img/nvj.jpg' },
+    { id: 6, nombre: "Espuma para afeitar", tipo: "Afeitado", desc: "Espuma para un afeitado suave", precio: 890, img: '../img/esp.jpg' },
+]
 
-stockProductos.forEach((producto) => {
-
-    const div = document.createElement('div')
-    div.className = 'producto'
-
-    div.innerHTML = `
-            <img src=${producto.img} alt="">
-            <h3>${producto.nombre}</h3>
-            <p>${producto.desc}</p>
-            <p class="precioProducto">Precio: $${producto.precio}</p>
-    `
-
-    const button = document.createElement('button')
-    button.className = "boton-agregar"
-    button.innerHTML = `Agregar <i class="fas fa-shopping-cart"></i>`
-
-    button.addEventListener('click', () => {
-        agregarAlCarrito(producto.id)
+const pedirProductos =  () => {
+    return new Promise ( (resolve, reject)  => {
+        setTimeout (() =>{
+            resolve(SP)
+        }), 2500
     })
 
-    div.append(button)
+}
 
-    contenedorProductos.append(div)
-})
+let productos = []
+
+const renderProductos = (Arr) => {
+    stockProductos.forEach((producto) => {
+
+        const div = document.createElement('div')
+        div.className = 'producto'
+    
+        div.innerHTML = `
+                <img src=${producto.img} alt="">
+                <h3>${producto.nombre}</h3>
+                <p>${producto.desc}</p>
+                <p class="precioProducto">Precio: $${producto.precio}</p>
+        `
+    
+        const button = document.createElement('button')
+        button.className = "boton-agregar"
+        button.innerHTML = `Agregar <i class="fas fa-shopping-cart"></i>`
+    
+        button.addEventListener('click', () => {
+            agregarAlCarrito(producto.id)
+        })
+    
+        div.append(button)
+    
+        contenedorProductos.append(div)
+    })
+}
+
+pedirProductos ()
+    .then ((res)    =>{
+        productos = res 
+        renderProductos (productos)
+    })
+
 
 // Agregar productos al carrito 
 const agregarAlCarrito = (id) => {
@@ -90,9 +114,9 @@ const agregarAlCarrito = (id) => {
     
     Swal.fire({
         icon:'success',
-        title: 'el producto fue agregado exitosamente',
+        title: 'El producto fue agregado exitosamente',
         toast: true,
-        timer: 1500,
+        timer: 1000,
         showConfirmButton: false,
         position: 'bottom-left' 
     })
