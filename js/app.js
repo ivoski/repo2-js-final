@@ -66,7 +66,7 @@ const pedirProductos =  () => {
     return new Promise ( (resolve, reject)  => {
         setTimeout (() =>{
             resolve(SP)
-        }), 2500
+        }, 2500)
     })
 
 }
