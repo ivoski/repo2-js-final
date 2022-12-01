@@ -60,6 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
 const SP =  [
     { id: 5, nombre: "Navaja para afeitar", tipo: "Afeitado", desc: "Navaja para un afeitado masculino", precio: 2499, img: '../img/nvj.jpg' },
     { id: 6, nombre: "Espuma para afeitar", tipo: "Afeitado", desc: "Espuma para un afeitado suave", precio: 890, img: '../img/esp.jpg' },
+    { id: 7, nombre: "Kit de afeitado", tipo: "Afeitado", desc: "El kit definitivo para afeitarse", precio: 3499, img: '../img/kit.jpg' },
+    { id: 8, nombre: "Tinturas permanentes", tipo: "Tintura", desc: "Todos los colores disponibles", precio: 1780, img: '../img/ktt.jpg' }
 ]
 
 const pedirProductos =  () => {
@@ -74,7 +76,7 @@ const pedirProductos =  () => {
 let productos = []
 
 const renderProductos = (Arr) => {
-    stockProductos.forEach((producto) => {
+        SP.forEach((producto) => {
 
         const div = document.createElement('div')
         div.className = 'producto'
@@ -105,6 +107,31 @@ pedirProductos ()
         productos = res 
         renderProductos (productos)
     })
+
+    stockProductos.forEach((producto) => {
+
+        const div = document.createElement('div')
+        div.className = 'producto'
+    
+        div.innerHTML = `
+                <img src=${producto.img} alt="">
+                <h3>${producto.nombre}</h3>
+                <p>${producto.desc}</p>
+                <p class="precioProducto">Precio: $${producto.precio}</p>
+        `
+    
+        const button = document.createElement('button')
+        button.className = "boton-agregar"
+        button.innerHTML = `Agregar <i class="fas fa-shopping-cart"></i>`
+    
+        button.addEventListener('click', () => {
+            agregarAlCarrito(producto.id)
+        })
+    
+        div.append(button)
+    
+        contenedorProductos.append(div)
+    })    
 
 
 // Agregar productos al carrito 
